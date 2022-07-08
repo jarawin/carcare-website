@@ -27,7 +27,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => { handleChangeLanguage() }}>
-          EEIihgufy
+          th
         </a>
       </header>
     </div>
