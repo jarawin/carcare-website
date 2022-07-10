@@ -5,12 +5,24 @@ import { initReactI18next } from "react-i18next";
 const resources = {
     en: {
         translation: {
-            "Welcome to React": "Welcome to React and react-i18next"
+            "carcare": "Car Care",
+            "booking": "Booking",
+            "home": "Home",
+            "menu": "Menu",
+            "login": "Login",
+            "register": "Register",
+            "nopage": "No Page",
         }
     },
     th: {
         translation: {
-            "Welcome to React": "สวัสดี รีแอค และรีแอค-ไอสิบแปดเน็ก"
+            "carcare": "ดูแลรถยนต์",
+            "booking": "จองคิวออนไลน์",
+            "home": "หน้าหลัก",
+            "menu": "เมนู",
+            "login": "เข้าสู่ระบบ",
+            "register": "สมัครสมาชิก",
+            "nopage": "ไม่มีหน้านี้",
         }
     }
 };
