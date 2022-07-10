@@ -12,6 +12,7 @@ const resources = {
             "login": "Login",
             "register": "Register",
             "nopage": "No Page",
+            "header": "Header",
         }
     },
     th: {
@@ -23,6 +24,7 @@ const resources = {
             "login": "เข้าสู่ระบบ",
             "register": "สมัครสมาชิก",
             "nopage": "ไม่มีหน้านี้",
+            "header": "ส่วนหัว",
         }
     }
 };
