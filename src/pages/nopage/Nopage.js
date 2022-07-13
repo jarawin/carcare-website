@@ -1,9 +1,9 @@
 import React from 'react'
-import "./Nopage.css"
+import "./NoPage.module.css"
 
 import { useTranslation } from "react-i18next";
 
-function Nopage() {
+function NoPage() {
   const { t } = useTranslation();
 
   return (
@@ -11,4 +11,4 @@ function Nopage() {
   )
 }
 
-export default Nopage
+export default NoPage

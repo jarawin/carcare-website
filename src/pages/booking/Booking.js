@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Booking.css"
+import "./Booking.module.css"
 
 import { useTranslation } from "react-i18next";
 

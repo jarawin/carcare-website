@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Register.css"
+import "./Register.module.css"
 
 import { useTranslation } from "react-i18next";
 

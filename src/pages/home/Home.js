@@ -1,18 +1,20 @@
-import React from "react";
-import "./Home.css";
-import Banner from "./conponents/Banner";
+import './Home.module.css';
 
-import { useTranslation } from "react-i18next";
+import React from 'react';
+
+import classNames from '../../utils/classNames';
+
+import { useTranslation } from 'react-i18next';
 
 function Home() {
   const { t } = useTranslation();
 
-  return (
-    <>
-      {/* <h1 >{t('home')}</h1> */}
-      <Banner />
-    </>
-  );
+  const [dark, setDark] = React.useState(false);
+  const handleDark = () => {
+    setDark(!dark);
+  };
+
+  return <div></div>;
 }
 
 export default Home;
