@@ -1,8 +1,7 @@
-import './Banner.module.css';
-import React, { useState } from 'react';
-
 import classNames from '../../utils/classNames';
+
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 import { XIcon } from '@heroicons/react/outline';
 
@@ -14,12 +13,12 @@ function Banner(props) {
     <div
       className={classNames(
         closed ? 'hidden' : 'flex',
-        'items-center justify-center bg-indigo-600 '
+        'items-center justify-center bg-red-700 '
       )}
     >
       <button
         type="button"
-        className="absolute rounded-md text-gray-400 dark:text-white right-3"
+        className="absolute rounded-md text-gray-100 dark:text-white right-3"
         onClick={() => setClosed(true)}
       >
         <span className="sr-only">Close banner</span>

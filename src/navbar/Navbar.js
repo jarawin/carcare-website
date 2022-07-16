@@ -1,161 +1,180 @@
-import './Navbar.css';
 import classNames from '../utils/classNames';
-import useDarkMode from '../utils/useDarkMode';
+import useDarkMode from '../system/useDarkMode';
+import useLogin from '../system/useLogin';
 
 import Profile from './profile/Profile';
-
 import { useTranslation } from 'react-i18next';
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
-import { MenuIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Banner from './banner/Banner';
+import Setting from './setting/Setting';
 
-const navigation = {
-  categories: [
-    {
-      id: 'women',
-      name: 'Women',
-      featured: [
-        {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-          imageAlt:
-            'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: 'Basic Tees',
-          href: '#',
-          imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt:
-            'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'men',
-      name: 'Men',
-      featured: [
-        {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-          imageAlt:
-            'Drawstring top with elastic loop closure and textured interior padding.',
-        },
-        {
-          name: 'Artwork Tees',
-          href: '#',
-          imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-          imageAlt:
-            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-        },
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-          ],
-        },
-      ],
-    },
-  ],
-  pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
-  ],
-};
+import Login from './login/Login';
 
 export default function Example() {
   const { t } = useTranslation();
 
-  const [isLogin, setIsLogin] = useState(false);
+  const navigation = {
+    categories: [
+      {
+        id: 'women',
+        name: 'Women',
+        featured: [
+          {
+            name: 'New Arrivals',
+            href: '#',
+            imageSrc:
+              'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
+            imageAlt:
+              'Models sitting back to back, wearing Basic Tee in black and bone.',
+          },
+          {
+            name: 'Basic Tees',
+            href: '#',
+            imageSrc:
+              'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
+            imageAlt:
+              'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+          },
+        ],
+        sections: [
+          {
+            id: 'clothing',
+            name: 'Clothing',
+            items: [
+              { name: 'Tops', href: '#' },
+              { name: 'Dresses', href: '#' },
+              { name: 'Pants', href: '#' },
+              { name: 'Denim', href: '#' },
+              { name: 'Sweaters', href: '#' },
+              { name: 'T-Shirts', href: '#' },
+              { name: 'Jackets', href: '#' },
+              { name: 'Activewear', href: '#' },
+              { name: 'Browse All', href: '#' },
+            ],
+          },
+          {
+            id: 'accessories',
+            name: 'Accessories',
+            items: [
+              { name: 'Watches', href: '#' },
+              { name: 'Wallets', href: '#' },
+              { name: 'Bags', href: '#' },
+              { name: 'Sunglasses', href: '#' },
+              { name: 'Hats', href: '#' },
+              { name: 'Belts', href: '#' },
+            ],
+          },
+          {
+            id: 'brands',
+            name: 'Brands',
+            items: [
+              { name: 'Full Nelson', href: '#' },
+              { name: 'My Way', href: '#' },
+              { name: 'Re-Arranged', href: '#' },
+              { name: 'Counterfeit', href: '#' },
+              { name: 'Significant Other', href: '#' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'men',
+        name: 'Men',
+        featured: [
+          {
+            name: 'New Arrivals',
+            href: '#',
+            imageSrc:
+              'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+            imageAlt:
+              'Drawstring top with elastic loop closure and textured interior padding.',
+          },
+          {
+            name: 'Artwork Tees',
+            href: '#',
+            imageSrc:
+              'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+            imageAlt:
+              'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+          },
+        ],
+        sections: [
+          {
+            id: 'clothing',
+            name: 'Clothing',
+            items: [
+              { name: 'Tops', href: '#' },
+              { name: 'Pants', href: '#' },
+              { name: 'Sweaters', href: '#' },
+              { name: 'T-Shirts', href: '#' },
+              { name: 'Jackets', href: '#' },
+              { name: 'Activewear', href: '#' },
+              { name: 'Browse All', href: '#' },
+            ],
+          },
+          {
+            id: 'accessories',
+            name: 'Accessories',
+            items: [
+              { name: 'Watches', href: '#' },
+              { name: 'Wallets', href: '#' },
+              { name: 'Bags', href: '#' },
+              { name: 'Sunglasses', href: '#' },
+              { name: 'Hats', href: '#' },
+              { name: 'Belts', href: '#' },
+            ],
+          },
+          {
+            id: 'brands',
+            name: 'Brands',
+            items: [
+              { name: 'Re-Arranged', href: '#' },
+              { name: 'Counterfeit', href: '#' },
+              { name: 'Full Nelson', href: '#' },
+              { name: 'My Way', href: '#' },
+            ],
+          },
+        ],
+      },
+    ],
+    pages: [
+      { name: t('menu.home'), href: '/', id: 'home' },
+      { name: t('menu.services'), href: '/services', id: 'services' },
+      { name: t('menu.booking'), href: '/booking', id: 'booking' },
+      { name: t('menu.member'), href: '/member', id: 'member' },
+      { name: t('menu.queue'), href: '/queue', id: 'queue' },
+    ],
+  };
+
+  const [isLogin, handleLogin] = useLogin();
 
   const [colorTheme, setTheme] = useDarkMode();
   const setDarkMode = () => setTheme(colorTheme);
 
   const [open, setOpen] = useState(false);
+  const [pageActive, setPageActive] = useState('home');
+
+  const handleClickPage = (e) => {
+    const id = e.currentTarget.id;
+    setPageActive(id);
+  };
+
+  useEffect(() => {
+    const pathname = window.location.pathname;
+    const pageActiveIndex = pathname.split('/').pop();
+    if (pageActiveIndex) {
+      setPageActive(pageActiveIndex === '' ? 'home' : pageActiveIndex);
+    }
+  }, []);
 
   return (
     <div className="">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
+        <Dialog as="div" className="relative z-40 md:hidden" onClose={setOpen}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -178,7 +197,7 @@ export default function Example() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative max-w-xs w-full bg-white dark:bg-slate-800 shadow-xl pb-12 flex flex-col overflow-y-auto">
+              <Dialog.Panel className="relative max-w-xs w-full bg-white dark:bg-zinc-800 shadow-xl pb-12 flex flex-col overflow-y-auto">
                 <div className="px-4 pt-5 pb-2 flex">
                   <button
                     type="button"
@@ -200,7 +219,7 @@ export default function Example() {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? 'text-indigo-600 border-indigo-600'
+                                ? 'text-red-600 border-red-600'
                                 : 'text-gray-900 dark:text-slate-300 border-transparent',
                               'flex-1 whitespace-nowrap  py-4 px-1 border-b-2 text-base font-medium'
                             )
@@ -332,163 +351,74 @@ export default function Example() {
         </Dialog>
       </Transition.Root>
 
-      <header className="relative bg-white dark:bg-slate-800">
+      {/* ======= PC ======= */}
+      <header className="relative ">
         <Banner />
-
         <nav
           aria-label="Top"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white dark:bg-zinc-900 shadow-lg rounded"
         >
-          <div className="border-b border-gray-200">
-            <div className="h-16 flex items-center">
-              <button
-                type="button"
-                className="bg-white dark:bg-white p-2 rounded-md text-gray-400 dark:text-slate-800 lg:hidden"
-                onClick={() => setOpen(true)}
-              >
-                <span className="sr-only">Open menu</span>
-                <MenuIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
+          <div className="h-16 flex items-center">
+            <button
+              type="button"
+              className="bg-white dark:bg-white p-2 rounded-md text-gray-400 dark:text-slate-800 md:hidden"
+              onClick={() => setOpen(true)}
+            >
+              <span className="sr-only">Open menu</span>
+              <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
 
-              {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
-                <a href="#">
-                  <span className="sr-only">Workflow</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                    alt=""
+            {/* Logo */}
+            <div className="flex lg:ml-4">
+              <a href="#">
+                <span className="sr-only">car care</span>
+                <h1 className="ml-2 mr-5 h-8 text-2xl font-serif font-extrabold w-10 text-zinc-700 dark:text-white">
+                  TCC
+                </h1>
+              </a>
+            </div>
+
+            {/* Flyout menus */}
+            <Popover.Group className="hidden md:ml-5 md:block md:self-stretch">
+              <div className="h-full flex md:space-x-6 lg:space-x-8">
+                {navigation.pages.map((page) => (
+                  <a
+                    key={page.name}
+                    href={page.href}
+                    onClick={handleClickPage}
+                    className={classNames(
+                      page.id == pageActive
+                        ? 'text-red-600 dark:text-red-600 dark:hover:text-red-800 font-bold border-b-2'
+                        : 'text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-red-600',
+                      'flex items-center text-sm font-medium  border-red-600'
+                    )}
+                  >
+                    {page.name}
+                  </a>
+                ))}
+              </div>
+            </Popover.Group>
+
+            <div className="ml-auto flex items-center">
+              {isLogin ? (
+                <div className="flex items-center mx-3">
+                  <Profile login={[isLogin, handleLogin]} />
+                  <span
+                    className="ml-4 mr-3 h-6 w-px bg-zinc-200"
+                    aria-hidden="true"
                   />
-                </a>
-              </div>
-
-              {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="h-full flex space-x-8">
-                  {navigation.categories.map((category) => (
-                    <Popover key={category.name} className="flex">
-                      {({ open }) => (
-                        <>
-                          <div className="relative flex">
-                            <Popover.Button
-                              className={classNames(
-                                open
-                                  ? 'border-indigo-600 text-indigo-600'
-                                  : 'border-transparent text-gray-700 hover:text-gray-800 dark:text-white dark:hover:text-indigo-600 ',
-                                'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
-                              )}
-                            >
-                              {category.name}
-                            </Popover.Button>
-                          </div>
-
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-200"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="transition ease-in duration-150"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Popover.Panel className="absolute top-full inset-x-0 text-sm text-gray-500">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                              <div
-                                className="absolute inset-0 top-1/2 bg-white  shadow"
-                                aria-hidden="true"
-                              />
-
-                              <div className="relative bg-white dark:bg-slate-800 dark:text-indigo-600">
-                                <div className="max-w-7xl mx-auto px-8">
-                                  <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
-                                    <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                      {category.featured.map((item) => (
-                                        <div
-                                          key={item.name}
-                                          className="group relative text-base sm:text-sm"
-                                        >
-                                          <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                            <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
-                                              className="object-center object-cover"
-                                            />
-                                          </div>
-                                          <a
-                                            href={item.href}
-                                            className="mt-6 block font-medium text-gray-900"
-                                          >
-                                            <span
-                                              className="absolute z-10 inset-0"
-                                              aria-hidden="true"
-                                            />
-                                            {item.name}
-                                          </a>
-                                          <p
-                                            aria-hidden="true"
-                                            className="mt-1"
-                                          >
-                                            Shop now
-                                          </p>
-                                        </div>
-                                      ))}
-                                    </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
-                                      {category.sections.map((section) => (
-                                        <div key={section.name}>
-                                          <p
-                                            id={`${section.name}-heading`}
-                                            className="font-medium text-gray-900 dark:text-slate-200"
-                                          >
-                                            {section.name}
-                                          </p>
-                                          <ul
-                                            role="list"
-                                            aria-labelledby={`${section.name}-heading`}
-                                            className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                          >
-                                            {section.items.map((item) => (
-                                              <li
-                                                key={item.name}
-                                                className="flex"
-                                              >
-                                                <a
-                                                  href={item.href}
-                                                  className="hover:text-gray-800"
-                                                >
-                                                  {item.name}
-                                                </a>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </Popover.Panel>
-                          </Transition>
-                        </>
-                      )}
-                    </Popover>
-                  ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800 dark:text-white dark:hover:text-indigo-700"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
+                  <Setting login={[isLogin, handleLogin]} />
                 </div>
-              </Popover.Group>
-
-              <div className="ml-auto flex items-center">
-                <Profile isLogin={isLogin} />
-              </div>
+              ) : (
+                <div className="flex items-center mx-3">
+                  <Login login={[isLogin, handleLogin]} />
+                  <span
+                    className="ml-4 mr-3 h-6 w-px bg-zinc-200"
+                    aria-hidden="true"
+                  />
+                  <Setting login={[isLogin, handleLogin]} />
+                </div>
+              )}
             </div>
           </div>
         </nav>

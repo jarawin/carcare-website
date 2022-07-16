@@ -5,12 +5,12 @@ import reportWebVitals from './utils/reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from './layout/Layout';
-import Home from './pages/home/Home';
-import Booking from './pages/booking/Booking';
-import Menu from './pages/menu/Menu';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
-import NoPage from './pages/nopage/NoPage';
+import Home from './userPages/home/Home';
+import Booking from './userPages/booking/Booking';
+import NoPage from './userPages/nopage/NoPage';
+import Queue from './userPages/queue/Queue';
+import Member from './userPages/member/Member';
+import Services from './userPages/services/Services';
 
 export default function Index() {
   return (
@@ -18,10 +18,10 @@ export default function Index() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="menu" element={<Menu />} />
           <Route path="booking" element={<Booking />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="queue" element={<Queue />} />
+          <Route path="member" element={<Member />} />
+          <Route path="services" element={<Services />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
