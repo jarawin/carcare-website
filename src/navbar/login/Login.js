@@ -4,24 +4,24 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { BsFacebook, BsLine, BsGoogle } from 'react-icons/bs';
 
-function Login(props) {
+import { useDispatch } from 'react-redux';
+import { login } from '../../slices/userSlice';
+
+function Login() {
   const { t } = useTranslation();
-  const [isLogin, handleLogin] = props.login;
+  const dispatch = useDispatch();
 
   const loginNavigation = [
     {
       name: 'Line',
-      onClick: handleLogin,
       icon: BsLine,
     },
     {
       name: 'Facebook',
-      onClick: handleLogin,
       icon: BsFacebook,
     },
     {
       name: 'Google',
-      onClick: handleLogin,
       icon: BsGoogle,
     },
   ];
@@ -29,14 +29,14 @@ function Login(props) {
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="max-w-xs  rounded-full flex items-center text-sm">
-        <button
+        <div
           type="button"
-          className="dark:bg-zinc-800 text-zinc-700 dark:text-white hover:text-red-600   dark:hover:text-red-600 rounded-full mr-2"
+          className=" text-zinc-700 dark:text-white hover:text-red-600   dark:hover:text-red-600 rounded-full mr-2"
         >
-          <a class="text-sm font-medium text-zinc-700 dark:text-white hover:text-red-600 dark:hover:text-red-600">
+          <a className="text-sm font-medium text-zinc-700 dark:text-white hover:text-red-600 dark:hover:text-red-600">
             {t('usernav.login')}
           </a>
-        </button>
+        </div>
       </Menu.Button>
       <Transition
         as={Fragment}
@@ -54,7 +54,7 @@ function Login(props) {
                 <div className="flex flex-row  items-center  hover:bg-red-600 hover:text-white rounded">
                   <item.icon className="ml-2 pl-1 basis-1/6" />
                   <a
-                    onClick={item.onClick}
+                    onClick={() => dispatch(login({ app: item.name }))}
                     className="hover:text-white block px-2 py-2 text-sm  text-zinc-700 basis-5/6"
                   >
                     {item.name}

@@ -1,13 +1,13 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import HomeTrans from '../userPages/home/HomeTrans';
-import BookingTrans from '../userPages/booking/BookingTrans';
-import NoPageTrans from '../userPages/nopage/NoPageTrans';
-import QueueTrans from '../userPages/queue/QueueTrans';
-import MemberTrans from '../userPages/member/MemberTrans';
-import ServicesTrans from '../userPages/services/ServicesTrans';
-import indexTrans from '../navbar/NavbarTrans';
+import HomeTrans from './HomeTrans';
+import BookingTrans from './BookingTrans';
+import NoPageTrans from './NoPageTrans';
+import QueueTrans from '../../pages/users/queue/QueueTrans';
+import MemberTrans from './MemberTrans';
+import ServicesTrans from './ServicesTrans';
+import indexTrans from './NavbarTrans';
 
 const resources = {
   en: {

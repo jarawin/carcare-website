@@ -1,33 +1,33 @@
-import './utils/i18n';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import './contents/i18n/i18n';
+import { AppUser } from './App';
+
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
 import reportWebVitals from './utils/reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 
-import Layout from './layout/Layout';
-import Home from './userPages/home/Home';
-import Booking from './userPages/booking/Booking';
-import NoPage from './userPages/nopage/NoPage';
-import Queue from './userPages/queue/Queue';
-import Member from './userPages/member/Member';
-import Services from './userPages/services/Services';
+import loginSlice from './slices/userSlice';
+import pageSlice from './slices/pageSlice';
 
-export default function Index() {
+const store = configureStore({
+  reducer: { login: loginSlice, page: pageSlice },
+});
+
+const root = createRoot(document.getElementById('root'));
+const Index = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="booking" element={<Booking />} />
-          <Route path="queue" element={<Queue />} />
-          <Route path="member" element={<Member />} />
-          <Route path="services" element={<Services />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AppUser />
+        </BrowserRouter>
+      </Provider>
+    </StrictMode>
   );
-}
+};
 
-ReactDOM.render(<Index />, document.getElementById('root'));
+root.render(<Index />);
 reportWebVitals();

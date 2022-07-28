@@ -2,18 +2,14 @@ import i18next from 'i18next';
 
 function useLanguage() {
   const language = i18next.language;
+  const newLanguage = language === 'en' ? 'th' : 'en';
 
-  const handleLanguage = () => {
-    if (i18next.language === 'en') {
-      i18next.changeLanguage('th');
-      localStorage.setItem('language', 'th');
-    } else {
-      i18next.changeLanguage('en');
-      localStorage.setItem('language', 'en');
-    }
+  const setLanguage = (lang = newLanguage) => {
+    i18next.changeLanguage(lang);
+    localStorage.setItem('language', newLanguage);
   };
 
-  return [language, handleLanguage];
+  return [language, setLanguage];
 }
 
 export default useLanguage;

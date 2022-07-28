@@ -1,26 +1,21 @@
 import { useState } from 'react';
+// import LineLiff from './login/LineLiff';
 
 function useLogin() {
   const [isLogin, setIsLogin] = useState(false);
+
   const handleLogin = (app) => {
-    switch(app){
-        case 'facebook':
-            setIsLogin(true);
-            break;
-        case 'google':
-            setIsLogin(true);
-            break;
-        case 'twitter':
-            setIsLogin(true);
-            break;
-        case 'github':
-            setIsLogin(true);
-            break;
-        case 'logout':
-            setIsLogin(false);
-            break;
-        default:
-            break;
+    switch (app) {
+      case 'Facebook':
+        setIsLogin(true);
+        break;
+      case 'Google':
+        setIsLogin(true);
+        break;
+      case 'Line':
+        // LineLiff.login();
+        // console.log(LineLiff.getUserData());
+        break;
     }
     setIsLogin(!isLogin);
     alert(isLogin ? 'Signed out' : 'Signed in');

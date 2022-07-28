@@ -1,18 +1,8 @@
 import { useState, useEffect } from 'react';
 
 function useDarkMode() {
-  const defaultTheme = 'light';
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || defaultTheme
-  );
-
-  const handleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  };
+  const defaultTheme = localStorage.getItem('theme') || 'light';
+  const [theme, setTheme] = useState(defaultTheme);
 
   // detect theme change from system
   useEffect(() => {
@@ -35,7 +25,7 @@ function useDarkMode() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  return [theme, handleTheme];
+  return [theme, setTheme];
 }
 
 export default useDarkMode;

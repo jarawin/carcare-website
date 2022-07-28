@@ -5,21 +5,22 @@ import { UserIcon, LoginIcon, LogoutIcon } from '@heroicons/react/outline';
 
 function Profile(props) {
   const { t } = useTranslation();
-  const [isLogin, handleLogin] = props.login;
+  const { user } = props.data;
 
-  const user = {
-    name: 'Tom',
-    rank: 'Silver',
-    position: 'Manager account',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  const handleLogout = () => {
+    user.handleLogin();
+    props.handleShowProfile(false);
   };
 
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="max-w-xs bg-transparent  rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-red-600 hover:ring-red-600 hover:ring-2  ">
         <span className="sr-only">Open user menu</span>
-        <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+        <img
+          className="h-8 w-8 rounded-full"
+          src={user.profile.imageUrl}
+          alt=""
+        />
       </Menu.Button>
       <Transition
         as={Fragment}
@@ -35,25 +36,25 @@ function Profile(props) {
             <div className="   hover:bg-red-100 rounded-t items-center text-center border-b-2 border-zinc-400">
               <UserIcon className="pt-4 w-10 mx-auto" />
               <span className="mt-2 font-bold block px-2 text-sm text-center  text-zinc-800">
-                {user.name} ({user.rank})
+                {user.profile.name} ({user.profile.rank})
               </span>
               <span className="mb-2 block text-xs text-center  text-zinc-700">
-                {user.position}
+                {user.profile.position}
               </span>
             </div>
           </Menu.Item>
           <Menu.Item>
-            <div className="flex flex-row    hover:bg-red-600 hover:text-white rounded-b">
-              {isLogin ? (
+            <div className="flex flex-row hover:bg-red-600 hover:text-white rounded-b">
+              {user.isLogin ? (
                 <LogoutIcon className="ml-2 pl-1 basis-1/6" />
               ) : (
                 <LoginIcon className="ml-2 pl-1 basis-1/6" />
               )}
               <button
                 className="hover:text-white block px-2 py-2 text-sm  text-zinc-700 basis-5/6"
-                onClick={handleLogin}
+                onClick={handleLogout}
               >
-                {isLogin ? t('usernav.logout') : t('usernav.login')}
+                {user.isLogin ? t('usernav.logout') : t('usernav.login')}
               </button>
             </div>
           </Menu.Item>
